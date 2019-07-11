@@ -1,0 +1,25 @@
+{
+  "name": "pac-man",
+  "version": "0.1.0",
+  "description": "eat all balls, and don't get caught :)",
+  "main": "level-1.js",
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "fix-all": "eslint --fix ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dovidgrosh98/PAC-MAN.git"
+  },
+  "author": "David Grosh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dovidgrosh98/PAC-MAN/issues"
+  },
+  "homepage": "https://github.com/dovidgrosh98/PAC-MAN#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0"
+  }
+}
