@@ -7,6 +7,7 @@
 
 body {
     background-color: black;
+    z-index: -1;
 }
 
 header {
@@ -42,20 +43,23 @@ h1 {
     margin: 0 auto;
     position: relative;
     width: 690px;
+    z-index: 0;
 }
 
 #character {
-    /* background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/35a6d16c-bcd7-45cb-b718-ddcfbcebe02e/d95duo4-ca398546-f25b-42d9-bd3a-6e303e845d9d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzM1YTZkMTZjLWJjZDctNDVjYi1iNzE4LWRkY2ZiY2ViZTAyZVwvZDk1ZHVvNC1jYTM5ODU0Ni1mMjViLTQyZDktYmQzYS02ZTMwM2U4NDVkOWQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.jf4Og0FcdoHGlwjnSlqJdJwuu449c6b2ThysXmc3z_8'); */
-    background: orange;
-    /* background-position: ; */
-    /* background-size: ; */
+    background-image: url('https://res.cloudinary.com/dg98/image/upload/c_limit,h_30,w_500/v1562948088/pacman-spritesheet.png');
+    background-position: 0px 0px;
     height: 30px;
     position: absolute;
     transition: all 0.1s;
     width: 30px;
 }
+#character.mouth {
+    background-image: url('https://res.cloudinary.com/dg98/image/upload/c_limit,h_30,w_500/v1562948088/pacman-spritesheet.png');
+    background-position: 458px 0px;
+}
 
-.wall {background-image: url('http://pixelartmaker.com/art/52729392032d215.png');
+.wall {background-image: url('https://res.cloudinary.com/dg98/image/upload/v1562882532/52729392032d215.png');
     /* background: rgb(38, 255, 0); */
     background-size: contain;
     height: 30px;
@@ -64,18 +68,24 @@ h1 {
 }
 
 .ghosts {
-    background-color: lightblue;
-    background-size: contain;
+    background-image: url('https://res.cloudinary.com/dg98/image/upload/c_limit,h_160,w_160/v1562948355/cbacdb54a4bb09f.png');
+    /* background-color: lightblue; */
+    background-position: 0 0;
+    background-size: 150px 150px;
     height: 30px;
     position: absolute;
     width: 30px;
     transition: all 0.25s;
+    z-index: 2;
 }
 
 .dots {
     background: url('https://res.cloudinary.com/dg98/image/upload/v1562868591/853931_pixel-coin-png.png');
-    background-size: contain;
+    background-size: 25px 25px;
+    background-position: center;
+    background-repeat: no-repeat;
     height: 30px;
     position: absolute;
     width: 30px;
+    z-index: 1;
 }
