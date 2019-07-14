@@ -1,8 +1,51 @@
 
+@import url('https://fonts.googleapis.com/css?family=Notable&display=swap');
+* {
+    font-family: sans-serif;
+    padding: 0;
+    color: white;
+}
+
 body {
+    background-color: black;
+    z-index: -1;
+}
+
+#empty {
+    height: 81.88px;
+}
+
+#main {
+    align-items: center;
+    border: 5px ridge grey;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    height: 690px;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 690px;
+}
+h1 {
+    font-family: 'Notable';
+    font-size: 3em;
+    letter-spacing: 4px;
+    color: #fef350;
+}
+#buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 500px;
+}
+button {
+    height: 50px;
+    width: 150px;
+    background-color: grey;
+    font-size: 1.5em;
+    border-radius: 10px;
+}
+
+@keyframes c{
+    10% {
+        
+    }
 }

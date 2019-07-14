@@ -1,14 +1,65 @@
 /* eslint-disable */
+// header
+// time
+function stopWatch() {
+    let secondCounter = 0
+    setInterval(function(){
+       let secondTimer = secondCounter += 1
+       if (secondTimer <= 9) {
+        document.querySelector('#seconds').innerHTML = '0' + secondTimer
+       }
+       else if (secondTimer >= 10 && secondTimer <= 59) {
+        document.querySelector('#seconds').innerHTML = secondTimer
+       }
+       else if (secondTimer >= 60) {
+        secondCounter = 0
+        secondTimer = secondCounter
+        document.querySelector('#seconds').innerHTML = '0' + secondTimer
+       }
+    }, 1000)
 
-function time() {
-
+    let minuteCounter = 0
+    setInterval(function(){
+        let minuteTimer = minuteCounter += 1
+        if (minuteTimer <= 9) {
+            document.querySelector('#minutes').innerHTML = '0' + minuteTimer
+        }
+        else if (minuteTimer >= 10) {
+            document.querySelector('#minutes').innerHTML = minuteTimer
+        }
+    }, 60000)
 }
+
+// score
+function scoreBoard() {
+    let scoreCounter = 0
+    setInterval(function(){
+       let scoreUpByTen = scoreCounter += 10
+       if (scoreUpByTen < 99) {
+           document.querySelector('#score').innerHTML = '00' + scoreUpByTen
+       }
+       else if (scoreUpByTen < 999) {
+        document.querySelector('#score').innerHTML = '0' + scoreUpByTen
+       }
+       else if (scoreUpByTen > 999) {
+        document.querySelector('#score').innerHTML =scoreUpByTen
+       }
+    }, 1000)
+}
+scoreBoard()
+
+// main
+// board
 function board() {
     const gridCell = 30;
 
     const capman = { x: 0, y: 0 };
 
     const walls = [
+        // test walls
+        { x: 0, y : 1 },
+        { x: 1, y: 0 },
+        // reg walls
         { x: 1, y: 1 },
         { x: 2, y: 1 },
         { x: 5, y: 1 },
@@ -38,22 +89,27 @@ function board() {
         { x: 12, y: 3 },
         { x: 17, y: 3 },
         { x: 18, y: 3 },
+        { x: 3, y: 4 },
+        { x: 4, y: 4 },
         { x: 5, y: 4 },
         { x: 6, y: 4 },
         { x: 11, y: 4 },
         { x: 16, y: 4 },
         { x: 17, y: 4 },
+        { x: 18, y: 4 },
+        { x: 19, y: 4 },
+        { x: 6, y: 5 },
+        { x: 7, y: 5 },
+        { x: 8, y: 5 },
+        { x: 14, y: 5 },
+        { x: 15, y: 5 },
+        { x: 16, y: 5 },
         { x: 8, y: 9 },
         { x: 9, y: 9 },
-        { x: 10, y: 9 },
-        { x: 11, y: 9 },
-        { x: 12, y: 9 },
         { x: 13, y: 9 },
         { x: 14, y: 9 },
         { x: 8, y: 10 },
         { x: 14, y: 10 },
-        { x: 8, y: 11 },
-        { x: 14, y: 11 },
         { x: 8, y: 12 },
         { x: 14, y: 12 },
         { x: 8, y: 13 },
@@ -124,13 +180,40 @@ function board() {
         { x: 6, y: 2 },
         { x: 7, y: 2 },
         { x: 8, y: 2 },
+        { x: 14, y: 2 },
+        { x: 15, y: 2 },
+        { x: 16, y: 2 },
+        { x: 18, y: 2 },
+        { x: 19, y: 2 },
+        { x: 20, y: 2 },
+        { x: 22, y: 2 },
+        { x: 0, y: 3 },
+        { x: 1, y: 3 },
+        { x: 2, y: 3 },
+        { x: 3, y: 3 },
+        { x: 6, y: 3 },
+        { x: 7, y: 3 },
+        { x: 8, y: 3 },
+        { x: 9, y: 3 },
+        { x: 13, y: 3 },
+        { x: 14, y: 3 },
+        { x: 15, y: 3 },
+        { x: 16, y: 3 },
+        { x: 19, y: 3 },
+        { x: 20, y: 3 },
+        { x: 21, y: 3 },
+        { x: 22, y: 3 },
     ];
 
     const ghosts = [
-        { x: 10, y: 11 },
-        { x: 12, y: 11 },
+        // call color for ghost same as class name aside for x and y pos
+        { x: 10, y: 10, color: 'orange' },
+        { x: 12, y: 10, color: 'lightblue' },
+        { x: 10, y: 12,  color: 'red' },
+        { x: 12, y: 12, color: 'pink' },
     ];
 
+    // set the position for all walls
     function wallPosition() {
         for (const wall of walls) {
             const wallDiv = document.createElement('div');
@@ -140,9 +223,9 @@ function board() {
             document.querySelector('#board').appendChild(wallDiv);
         }
     }
-
     wallPosition();
 
+    // set position for all coins and remove all coins that were spliced
     function ballPosition() {
         const allBalls = document.querySelectorAll('.dots');
         for (let i = 0; i < allBalls.length; i += 1) {
@@ -157,19 +240,19 @@ function board() {
             document.querySelector('#board').appendChild(ballDiv);
         }
     }
-
     ballPosition();
 
+    // set starting point for all ghosts
     function ghostPosition() {
         for (const ghost of ghosts) {
             const ghostDiv = document.createElement('div');
-            ghostDiv.classList = 'ghosts';
+            ghostDiv.classList.add('ghosts');
+            ghostDiv.classList.add(ghost.color)
             ghostDiv.style.top = `${(ghost.y * gridCell).toString()}px`;
             ghostDiv.style.left = `${(ghost.x * gridCell).toString()}px`;
             document.querySelector('#board').appendChild(ghostDiv);
         }
     }
-
     ghostPosition();
 
     const boardBorder = function (x, y) {
@@ -225,6 +308,7 @@ function board() {
             return false;
         }
         if (wallInSpot(x, y)) {
+            // ghost collision test
             // const redBlock = document.createElement('div')
             // redBlock.classList = 'red'
             // redBlock.style.top = y * 30 + 'px'
@@ -235,35 +319,39 @@ function board() {
         return true;
     };
 
-    function ghostMovement() {
+    function ghostMovement(i) {
         setInterval(() => {
-            const x = ghosts[0].x
-            const y = ghosts[0].y
-            const ghostChar = document.querySelector('.ghosts');
+            const x = ghosts[i].x
+            const y = ghosts[i].y
+            const ghostChar = document.querySelectorAll('.ghosts')[i];
             const verticalOrHorizontalMove = Math.floor(Math.random() * 2) ? 'vertical' : 'horizontal'
             const verticalMovement = (Math.floor(Math.random() * 3) - 1); // -1, 0, or 1
             const horizontalMovement = (Math.floor(Math.random() * 3) - 1); // -1, 0, or 1
             switch (verticalOrHorizontalMove) {
                 case 'vertical':
                     if (canMoveTo(x, y + verticalMovement)) {
-                        ghosts[0].y = y + verticalMovement
-                        ghostChar.style.top = `${ghosts[0].y * gridCell}px`;
+                        ghosts[i].y = y + verticalMovement
+                        ghostChar.style.top = `${ghosts[i].y * gridCell}px`;
+                    }
+                    if (capman.y === ghosts[i].y && capman.x === ghosts[i].x) {
+                        gameOver()
                     }
                     break;
                 case 'horizontal':
                     if (canMoveTo(x + horizontalMovement, y)) {
-                        ghosts[0].x = x + horizontalMovement
-                        ghostChar.style.left = `${ghosts[0].x * gridCell}px`;
+                        ghosts[i].x = x + horizontalMovement
+                        ghostChar.style.left = `${ghosts[i].x * gridCell}px`;
+                    }
+                    if (capman.x === ghosts[i].x && capman.y === ghosts[i].y) {
+                        gameOver()
                     }
             }
         }, 100);
     }
-    ghostMovement()
-    // function takeGhostsOut() {
-    //         ghosts[i].style.top 
-    // }
-    // takeGhostsOut(ghosts[i])
-    //   for (let i = 0; i < ghosts.length; i++) ghostMovement(ghosts[i].x, ghosts[i].y, i);
+    for (let i = 0; i < ghosts.length; i++) { 
+        ghostMovement(i)
+    }
+
     function moveCharacterTo(x, y) {
         const capmanChar = document.querySelector('#character');
         capmanChar.style.top = `${(y * gridCell).toString()}px`;
@@ -315,28 +403,31 @@ function board() {
                 case 37:
                 case 65:
                     moveLeft();
+                    document.querySelector('#character').style.transform = 'rotate(180deg)'
                     break;
                 case 38:
                 case 87:
                     moveUp();
+                    document.querySelector('#character').style.transform = 'rotate(270deg)'
                     break;
                 case 39:
                 case 68:
                     moveRight();
+                    document.querySelector('#character').style.transform = 'rotate(0deg)'
                     break;
                 case 40:
                 case 83:
                     moveDown();
+                    document.querySelector('#character').style.transform = 'rotate(90deg)'
                     break;
                 default:
             }
         }
     });
-    //   setInterval(function(){
-    //       document.querySelector('#character').classList.toggle('mouth')
-    //   }, 500)
-    // Math.floor(Math.random() * 3) - 1;
-    // x: Math.floor(Math.random() * 21), y: Math.floor(Math.random() * 21)
+
 }
-time();
+setInterval(function(){
+    document.querySelector('#character').classList.toggle('mouth')
+}, 100)
+stopWatch();
 board();
