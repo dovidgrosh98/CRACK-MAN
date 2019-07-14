@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css?family=Notable&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Russo+One&display=swap&subset=cyrillic,latin-ext');
+* {
+    font-family: sans-serif;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    z-index: -1;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 690px;
+    margin: 0 auto;
+}
+
+h1, h2, span {
+    color: #fff;
+    box-sizing: border-box;
+    font-family: 'Russo One', serif;
+}
+
+header h1 {
+    color: #fef350;
+    font-family: 'Notable';
+    order: 2;
+}
+
+#score {
+    order: 3;
+}
+
+#time {
+    order: 1;
+}
+
+#board {
+    background-color: #000;
+    border: 5px ridge grey;
+    height: 690px;
+    margin: 0 auto;
+    position: relative;
+    width: 690px;
+    z-index: 0;
+}
+
+#character {
+    background-image: url('https://res.cloudinary.com/dg98/image/upload/c_limit,h_30/v1562948088/pacman-spritesheet.png');
+    background-position: 0px 0px;
+    height: 30px;
+    position: absolute;
+    transition: top 0.1s, left 0.1s;
+    width: 30px;
+}
+#character.mouth {
+    background-position: -34px 0px;
+}
+
+.wall {
+    background-image: url('https://res.cloudinary.com/dg98/image/upload/v1563134510/6b7e857bfdabf94.png');
+    background-size: contain;
+    height: 30px;
+    position: absolute;
+    width: 30px;
+}
+
+.ghosts {
+    background-image: url('https://res.cloudinary.com/dg98/image/upload/c_limit,h_70,w_70/v1563123105/80s-vector-pacman-4.png');
+    height: 30px;
+    position: absolute;
+    width: 30px;
+    transition: all 0.25s;
+    z-index: 2;
+}
+
+.ghosts.orange {
+    background-position: -1px 0px;
+}
+
+.ghosts.lightblue {
+    background-position: -1px 31.53px;
+}
+
+.ghosts.red {
+    background-position: 31px 0px;
+}
+
+.ghosts.pink {
+    background-position: 30px 31.75px;
+}
+
+.dots {
+    background: url('https://res.cloudinary.com/dg98/image/upload/v1562868591/853931_pixel-coin-png.png');
+    background-size: 20px 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 30px;
+    position: absolute;
+    width: 30px;
+    z-index: 1;
+}
+
+#game-over-screen {
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 690px;
+    justify-content: space-evenly;
+    opacity: 0;
+    position: absolute;
+    transition: all 1s;
+    width: 690px;
+    z-index: 9;
+}
+#game-over-screen h1 {
+    font-size: 2.5em;
+}
+#game-over-screen h3 {}
+#game-over-screen img {
+    height: 200px;
+    width: 250px;
+}
+#game-over-screen h2 {}
+
+button {
+    height: 50px;
+    width: 150px;
+    background-color: grey;
+    font-size: 1.5em;
+    border-radius: 10px;
+}
+
+#winning-screen {
+    align-items: center;
+    color: #fff;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: 690px;
+    width: 690px;
+    opacity: 0;
+    z-index: 10;
+    transition: all 1s;
+}
+#winning-screen h1 {}
+#winning-screen h3 {}
+
+#winning-screen h2 {}
+#winning-screen #buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 500px;
+}
+
+/*.red {
+    background: red;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    z-index: 1000;
+} */

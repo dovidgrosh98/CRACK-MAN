@@ -1,0 +1,99 @@
+
+@import url('https://fonts.googleapis.com/css?family=Notable&display=swap');
+* {
+    font-family: sans-serif;
+    padding: 0;
+    color: white;
+}
+
+body {
+    background-color: black;
+    z-index: -1;
+}
+
+#empty {
+    height: 81.88px;
+}
+
+#main {
+    align-items: center;
+    border: 5px ridge grey;
+    display: flex;
+    flex-direction: column;
+    height: 690px;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 690px;
+}
+h1 {
+    font-family: 'Notable';
+    font-size: 3em;
+    letter-spacing: 4px;
+    color: #fef350;
+    animation: changecolor 10s infinite;
+}
+h1:hover {
+    cursor: default;
+}
+#buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 500px;
+}
+button {
+    height: 50px;
+    width: 150px;
+    background-color: grey;
+    font-size: 1.5em;
+    border-radius: 10px;
+}
+button:hover {
+    cursor: pointer;
+}
+
+@keyframes changecolor{
+    10% {
+        color: #6ff9de;
+    }
+
+    20% {
+        color: #fef350;
+    }
+    25% {
+        transform: scale(0.5)
+    }
+
+    30% {
+        color: #f49e3f;
+    }
+
+    40% {
+        color: #fef350;
+    }
+
+    50% {
+        color: #ed3833;
+        transform: scale(1.5)
+
+    }
+
+    60% {
+        color: #fef350;
+    }
+
+    70% {
+        color: #f2a0cd;
+    }
+
+    75% {
+        transform: scale(0.5)
+    }
+
+    80% {
+        color: #fef350;
+    }
+    
+    100% {
+        transform: scale(1)
+    }
+}
