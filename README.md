@@ -2,4 +2,4 @@
 
 ### instructions
 
-use ![](https://res.cloudinary.com/dg98/image/upload/v1563138274/arrowkeys.png)
+use ![](https://res.cloudinary.com/dg98/image/upload/c_limit,h_35/v1563138274/arrowkeys.png)
