@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CAP-MAN - Level 1</title>
+    <link rel="stylesheet" href="level-1.css">
+</head>
+
+<body>
+    <header>
+        <h1>CAP-MAN</h1>
+        <h2 id="time"><span id="minutes">00</span>:<span id="seconds">00</span></h2>
+        <h2 id="score">0000</h2>
+    </header>
+
+    <div id="board">
+        <div id="character"></div>
+        <div id="game-over-screen">
+            <h1>Game Over</h1>
+            <h2 class="updated-score">Score</h3>
+                <img src="https://res.cloudinary.com/dg98/image/upload/v1563141607/pacman-png-mouth-closed-6.png"
+                    alt="funny photo">
+                <button>Try Again</button>
+        </div>
+        <div id="winning-screen">
+            <h1>Winner</h1>
+            <h2 class="updated-score">Score</h3>
+                <h2>Best Scores:</h2>
+                <h3>1st <span id="best-score"></span></h3>
+                <div id="buttons">
+                    <button id="play-again">Play Again</button>
+                    <button id="home">Home</button>
+                </div>
+        </div>
+    </div>
+    <script src="level-1.js"></script>
+</body>
+
+</html>

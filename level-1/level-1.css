@@ -24,7 +24,7 @@ h1, h2, span {
     font-family: 'Russo One', serif;
 }
 
-h1 {
+header h1 {
     color: #fef350;
     font-family: 'Notable';
     order: 2;
@@ -39,6 +39,7 @@ h1 {
 }
 
 #board {
+    background-color: #000;
     border: 5px ridge grey;
     height: 690px;
     margin: 0 auto;
@@ -48,7 +49,6 @@ h1 {
 }
 
 #character {
-    /* background-image: url('https://res.cloudinary.com/dg98/image/upload/c_limit,h_30,w_500/v1562948088/pacman-spritesheet.png'); */
     background-image: url('https://res.cloudinary.com/dg98/image/upload/c_limit,h_30/v1562948088/pacman-spritesheet.png');
     background-position: 0px 0px;
     height: 30px;
@@ -61,8 +61,6 @@ h1 {
 }
 
 .wall {
-    /* background-image: url('https://res.cloudinary.com/dg98/image/upload/v1562882532/52729392032d215.png'); */
-    /* background-image: url('https://res.cloudinary.com/dg98/image/upload/v1563134427/brick2_b.jpg'); */
     background-image: url('https://res.cloudinary.com/dg98/image/upload/v1563134510/6b7e857bfdabf94.png');
     background-size: contain;
     height: 30px;
@@ -105,7 +103,63 @@ h1 {
     width: 30px;
     z-index: 1;
 }
-/* .red {
+
+#game-over-screen {
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 690px;
+    justify-content: space-evenly;
+    opacity: 0;
+    position: absolute;
+    transition: all 1s;
+    width: 690px;
+    z-index: 9;
+}
+#game-over-screen h1 {
+    font-size: 2.5em;
+}
+#game-over-screen h3 {}
+#game-over-screen img {
+    height: 200px;
+    width: 250px;
+}
+#game-over-screen h2 {}
+
+button {
+    height: 50px;
+    width: 150px;
+    background-color: grey;
+    font-size: 1.5em;
+    border-radius: 10px;
+}
+
+#winning-screen {
+    align-items: center;
+    color: #fff;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: 690px;
+    width: 690px;
+    opacity: 0;
+    z-index: 10;
+    transition: all 1s;
+}
+#winning-screen h1 {}
+#winning-screen h3 {}
+
+#winning-screen h2 {}
+#winning-screen #buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 500px;
+}
+
+/*.red {
     background: red;
     position: absolute;
     width: 30px;
