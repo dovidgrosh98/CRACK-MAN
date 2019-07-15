@@ -50,10 +50,13 @@ function scoreBoard() {
 // main
 // board
 function board() {
+
     const gridCell = 30;
 
+    // character x y pos
     const capman = { x: 0, y: 0 };
 
+    // walls x y pos
     const walls = [
         { x: 1, y: 1 },
         { x: 2, y: 1 },
@@ -186,7 +189,8 @@ function board() {
         { x: 20, y: 21 },
         { x: 21, y: 21 },
     ];
-
+    
+    // coins x y pos
     const balls = [
         { x: 1, y: 0 },
         // { x: 2, y: 0 },
@@ -507,6 +511,7 @@ function board() {
     }
     ghostPosition();
 
+    // get the borders for collision
     const boardBorder = function (x, y) {
         if (x < 0 || y < 0 || x > 22 || y > 22) {
             return false;
@@ -515,6 +520,7 @@ function board() {
         return true;
     };
 
+    // get position of wall for collision
     const wallInSpot = function (x, y) {
         for (let i = 0; i < walls.length; i += 1) {
             if (walls[i].x === x && walls[i].y === y) {
@@ -524,6 +530,7 @@ function board() {
         return false;
     };
 
+    // get posistion of coins for collision
     const ballInSpot = function (x, y) {
         for (let i = 0; i < balls.length; i += 1) {
             if (balls[i].x === x && balls[i].y === y) {
@@ -541,6 +548,7 @@ function board() {
         }
         return false;
     };
+
     function removeBall(x, y) {
         for (let i = 0; i < balls.length; i += 1) {
             const ball = balls[i];
@@ -552,9 +560,11 @@ function board() {
 
     let executed = 0
     function gameOver() {
-        // make sure not to show when winning screen is already up
+        // make sure not to show when winning screen is already up and not to update score again
         if (executed == 0) {
             document.querySelectorAll('.updated-score')[0].innerHTML = score
+            const lostSound = new Audio('https://res.cloudinary.com/dg98/video/upload/v1563212979/Sound_19.wav')
+            lostSound.play()
             executed += 1
         }
         if (balls.length > 0) {
@@ -568,6 +578,8 @@ function board() {
     function youWin() {
         if (executed == 0) {
             document.querySelectorAll('.updated-score')[1].innerHTML = score
+            const winSound = new Audio('https://res.cloudinary.com/dg98/video/upload/v1563214566/victory.wav')
+            winSound.play()
             executed += 1
         }
         document.querySelector('#winning-screen').style.opacity = '1';
@@ -580,6 +592,10 @@ function board() {
             window.location.reload()
         })
     }
+
+    document.querySelector('#home').addEventListener('click', function(){
+        window.location.href = '../index.html';
+    })
 
     const canMoveTo = function (x, y) {
         if (!boardBorder(x, y)) {
