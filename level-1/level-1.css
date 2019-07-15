@@ -149,6 +149,7 @@ button {
     background-color: #000;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     position: absolute;
     height: 690px;
     width: 690px;
@@ -164,6 +165,7 @@ button {
 }
 
 #winning-screen h2 {
+    color: lightgreen;
     font-size: 2em;
 }
 
