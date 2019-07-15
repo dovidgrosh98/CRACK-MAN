@@ -1,9 +1,9 @@
 
 @import url('https://fonts.googleapis.com/css?family=Notable&display=swap');
 * {
-    color: white;
     font-family: sans-serif;
     padding: 0;
+    color: white;
 }
 
 body {
@@ -25,34 +25,29 @@ body {
     margin: 0 auto;
     width: 690px;
 }
-
 h1 {
-    animation: changecolor 10s infinite;
-    color: #fef350;
     font-family: 'Notable';
     font-size: 3em;
     letter-spacing: 4px;
+    color: #fef350;
+    animation: changecolor 10s infinite;
 }
-
 h1:hover {
     cursor: default;
 }
-
 #buttons {
     display: flex;
     justify-content: space-evenly;
     width: 500px;
 }
-
 button {
-    background-color: grey;
-    border-radius: 10px;
     color: white;
-    font-size: 1.5em;
     height: 50px;
     width: 150px;
+    background-color: grey;
+    font-size: 1.5em;
+    border-radius: 10px;
 }
-
 button:hover {
     cursor: pointer;
 }
@@ -65,7 +60,6 @@ button:hover {
     20% {
         color: #fef350;
     }
-    
     25% {
         transform: scale(0.5)
     }
