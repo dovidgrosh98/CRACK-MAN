@@ -166,11 +166,46 @@ button {
 
 #winning-screen h2 {
     color: lightgreen;
+    font-size: 3em;
+}
+
+#winning-screen h3 {
+    color: #fef350;
     font-size: 2em;
+}
+
+#winning-screen h3.new-record {
+    animation: pulse 5s infinite;
 }
 
 #winning-screen #buttons {
     display: flex;
     justify-content: space-evenly;
     width: 500px;
+}
+
+@keyframes pulse {
+    15% {
+        transform: scale(1.25)
+    }
+
+    30% {
+        transform: scale(0.5)
+    }
+
+    45% {
+        transform: scale(1.5)
+    }
+
+    60% {
+        transform: scale(1)
+    }
+
+    85% {
+        transform: scale(1.25)
+    }
+
+    100% {
+        transform: scale(1)
+    }
 }
