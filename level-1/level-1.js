@@ -187,7 +187,7 @@ function board() {
     ];
 
     // coins x y pos
-    const balls = [
+    const coins = [
         { x: 1, y: 0 },
         { x: 2, y: 0 },
         { x: 3, y: 0 },
@@ -479,16 +479,16 @@ function board() {
 
     // set position for all coins and remove all coins that were spliced
     function ballPosition() {
-        const allBalls = document.querySelectorAll('.dots');
-        for (let i = 0; i < allBalls.length; i += 1) {
-            allBalls[i].remove();
+        const allCoins = document.querySelectorAll('.dot');
+        for (let i = 0; i < allCoins.length; i += 1) {
+            allCoins[i].remove();
         }
 
-        for (let i = 0; i < balls.length; i += 1) {
+        for (let i = 0; i < coins.length; i += 1) {
             const ballDiv = document.createElement('div');
-            ballDiv.classList = 'dots';
-            ballDiv.style.top = `${(balls[i].y * gridCell).toString()}px`;
-            ballDiv.style.left = `${(balls[i].x * gridCell).toString()}px`;
+            ballDiv.classList = 'dot';
+            ballDiv.style.top = `${(coins[i].y * gridCell).toString()}px`;
+            ballDiv.style.left = `${(coins[i].x * gridCell).toString()}px`;
             document.querySelector('#board').appendChild(ballDiv);
         }
     }
@@ -528,8 +528,8 @@ function board() {
 
     // get position of coins for collision
     const ballInSpot = function (x, y) {
-        for (let i = 0; i < balls.length; i += 1) {
-            if (balls[i].x === x && balls[i].y === y) {
+        for (let i = 0; i < coins.length; i += 1) {
+            if (coins[i].x === x && coins[i].y === y) {
                 return true;
             }
         }
@@ -548,10 +548,10 @@ function board() {
 
     // remove coins off the board
     function removeBall(x, y) {
-        for (let i = 0; i < balls.length; i += 1) {
-            const ball = balls[i];
+        for (let i = 0; i < coins.length; i += 1) {
+            const ball = coins[i];
             if (ball.x === x && ball.y === y) {
-                balls.splice(i, 1);
+                coins.splice(i, 1);
             }
         }
     }
@@ -573,15 +573,17 @@ function board() {
     }
     function youWin() {
         // local storage for best score
-        if (typeof (Storage) === 'undefined') {
-            localStorage.setItem('highscore', score);
+        if (!localStorage.getItem('highscore')) {
+            localStorage.setItem('highscore', parseInt(score));
             const bestScore = parseInt(localStorage.getItem('highscore'));
             document.querySelector('#best-score').innerHTML = `New Lowest Record: ${bestScore}`;
+            // add class for pulse animation if score is new best score
             document.querySelector('#best-score').classList.add('new-record');
         } else if (parseInt(score) < parseInt(localStorage.getItem('highscore'))) {
             localStorage.setItem('highscore', score);
             const bestScore = parseInt(localStorage.getItem('highscore'));
             document.querySelector('#best-score').innerHTML = `New Lowest Record: ${bestScore}`;
+            // add class for pulse animation if score is new best score
             document.querySelector('#best-score').classList.add('new-record');
         } else {
             const bestScore = parseInt(localStorage.getItem('highscore'));
@@ -670,7 +672,7 @@ function board() {
             coin.play();
             removeBall(x, y);
             ballPosition();
-            if (balls <= 0) {
+            if (coins <= 0) {
                 youWin();
             }
         }
