@@ -42,7 +42,6 @@ function scoreBoard() {
         }
         return score = document.querySelector('#score').innerHTML;
     }, 1000);
-    return score;
 }
 
 // main
@@ -468,11 +467,11 @@ function board() {
 
     // set the position for all walls
     function wallPosition() {
-        for (const wall of walls) {
+        for (let i = 0; i < walls.length; i += 1) {
             const wallDiv = document.createElement('div');
             wallDiv.classList = 'wall';
-            wallDiv.style.top = `${(wall.y * gridCell).toString()}px`;
-            wallDiv.style.left = `${(wall.x * gridCell).toString()}px`;
+            wallDiv.style.top = `${(walls[i].y * gridCell).toString()}px`;
+            wallDiv.style.left = `${(walls[i].x * gridCell).toString()}px`;
             document.querySelector('#board').appendChild(wallDiv);
         }
     }
@@ -485,11 +484,11 @@ function board() {
             allBalls[i].remove();
         }
 
-        for (const ball of balls) {
+        for (let i = 0; i < balls.length; i += 1) {
             const ballDiv = document.createElement('div');
             ballDiv.classList = 'dots';
-            ballDiv.style.top = `${(ball.y * gridCell).toString()}px`;
-            ballDiv.style.left = `${(ball.x * gridCell).toString()}px`;
+            ballDiv.style.top = `${(balls[i].y * gridCell).toString()}px`;
+            ballDiv.style.left = `${(balls[i].x * gridCell).toString()}px`;
             document.querySelector('#board').appendChild(ballDiv);
         }
     }
@@ -497,12 +496,12 @@ function board() {
 
     // set starting point for all ghosts
     function ghostPosition() {
-        for (const ghost of ghosts) {
+        for (let i = 0; i < ghosts.length; i += 1) {
             const ghostDiv = document.createElement('div');
             ghostDiv.classList.add('ghosts');
-            ghostDiv.classList.add(ghost.color);
-            ghostDiv.style.top = `${(ghost.y * gridCell).toString()}px`;
-            ghostDiv.style.left = `${(ghost.x * gridCell).toString()}px`;
+            ghostDiv.classList.add(ghosts[i].color);
+            ghostDiv.style.top = `${(ghosts[i].y * gridCell).toString()}px`;
+            ghostDiv.style.left = `${(ghosts[i].x * gridCell).toString()}px`;
             document.querySelector('#board').appendChild(ghostDiv);
         }
     }
@@ -527,7 +526,7 @@ function board() {
         return false;
     };
 
-    // get posistion of coins for collision
+    // get position of coins for collision
     const ballInSpot = function (x, y) {
         for (let i = 0; i < balls.length; i += 1) {
             if (balls[i].x === x && balls[i].y === y) {
@@ -537,6 +536,7 @@ function board() {
         return false;
     };
 
+    // ghosts initial collision position
     const ghostInSpot = function (x, y) {
         for (let i = 0; i < ghosts.length; i += 1) {
             if (ghosts[i].x === x && ghosts[i].y === y) {
@@ -546,6 +546,7 @@ function board() {
         return false;
     };
 
+    // remove coins off the board
     function removeBall(x, y) {
         for (let i = 0; i < balls.length; i += 1) {
             const ball = balls[i];
@@ -555,16 +556,15 @@ function board() {
         }
     }
 
+    // if one of the ending screens get called, make sure the other won't be called after
     let executed = 0;
     function gameOver() {
         // make sure not to show when winning screen is already up and not to update score again
-        if (executed == 0) {
-            document.querySelectorAll('.updated-score')[0].innerHTML = score;
+        if (executed === 0) {
+            document.querySelectorAll('.updated-score')[0].innerHTML = parseInt(score);
             const lostSound = new Audio('https://res.cloudinary.com/dg98/video/upload/v1563212979/Sound_19.wav');
             lostSound.play();
             executed += 1;
-        }
-        if (balls.length > 0) {
             document.querySelector('#game-over-screen').style.opacity = '1';
             document.querySelector('#game-over-screen').style.zIndex = '12';
             document.querySelector('header').style.opacity = '0';
@@ -572,28 +572,46 @@ function board() {
         }
     }
     function youWin() {
-        if (executed == 0) {
-            document.querySelectorAll('.updated-score')[1].innerHTML = score;
+        // local storage for best score
+        if (typeof (Storage) === 'undefined') {
+            localStorage.setItem('highscore', score);
+            const bestScore = parseInt(localStorage.getItem('highscore'));
+            document.querySelector('#best-score').innerHTML = `New Lowest Record: ${bestScore}`;
+            document.querySelector('#best-score').classList.add('new-record');
+        } else if (parseInt(score) < parseInt(localStorage.getItem('highscore'))) {
+            localStorage.setItem('highscore', score);
+            const bestScore = parseInt(localStorage.getItem('highscore'));
+            document.querySelector('#best-score').innerHTML = `New Lowest Record: ${bestScore}`;
+            document.querySelector('#best-score').classList.add('new-record');
+        } else {
+            const bestScore = parseInt(localStorage.getItem('highscore'));
+            document.querySelector('#best-score').innerHTML = `Lowest Record: ${bestScore}`;
+        }
+
+        // add to executed in order for gameover not to happen
+        if (executed === 0) {
+            document.querySelectorAll('.updated-score')[1].innerHTML = parseInt(score);
             const winSound = new Audio('https://res.cloudinary.com/dg98/video/upload/v1563214566/victory.wav');
-            localStorage.setItem('lastname', 'Smith');
             winSound.play();
             executed += 1;
+            document.querySelector('#winning-screen').style.opacity = '1';
+            document.querySelector('header').style.opacity = '0';
+            openMouth.volume = 0;
         }
-        document.querySelector('#winning-screen').style.opacity = '1';
-        document.querySelector('header').style.opacity = '0';
-        openMouth.volume = 0;
     }
-
-    for (i = 0; i < 2; i++) {
+    // refresh page if clicked
+    for (let i = 0; i < document.querySelectorAll('.reload-page').length; i += 1) {
         document.querySelectorAll('.reload-page')[i].addEventListener('click', () => {
             window.location.reload();
         });
     }
 
+    // direct back to landing page if clicked
     document.querySelector('#home').addEventListener('click', () => {
         window.location.href = '../index.html';
     });
 
+    // add value for collision
     const canMoveTo = function (x, y) {
         if (!boardBorder(x, y)) {
             return false;
@@ -604,6 +622,7 @@ function board() {
         return true;
     };
 
+    // add random movement to ghost by one increment and only go by either x or y
     function ghostMovement(i) {
         setInterval(() => {
             const { x } = ghosts[i];
@@ -630,12 +649,15 @@ function board() {
                     if (capman.x === ghosts[i].x && capman.y === ghosts[i].y) {
                         gameOver();
                     }
+                    break;
+                default:
             }
         }, 100);
     }
-    for (let i = 0; i < ghosts.length; i++) {
+    for (let i = 0; i < ghosts.length; i += 1) {
         ghostMovement(i);
     }
+    // change pos of character
     function moveCharacterTo(x, y) {
         const capmanChar = document.querySelector('#character');
         capmanChar.style.top = `${(y * gridCell).toString()}px`;
@@ -645,7 +667,6 @@ function board() {
         }
         if (ballInSpot(x, y)) {
             const coin = new Audio('https://res.cloudinary.com/dg98/video/upload/v1563208630/coin.wav');
-            coin.volume = 0.25;
             coin.play();
             removeBall(x, y);
             ballPosition();
@@ -654,6 +675,7 @@ function board() {
             }
         }
     }
+
 
     function moveLeft() {
         if (canMoveTo(capman.x - 1, capman.y)) {
@@ -687,7 +709,7 @@ function board() {
         // arrow keys and 'w a s d'
         if ([37, 38, 39, 40, 65, 87, 68, 83].includes(evt.keyCode)) {
             evt.preventDefault();
-            // rotate to the direction charcter is going
+            // rotate to the direction character is going
             switch (evt.keyCode) {
                 case 37:
                 case 65:
@@ -714,7 +736,7 @@ function board() {
         }
     });
     const openMouth = new Audio('https://res.cloudinary.com/dg98/video/upload/v1563207353/jump.wav');
-    openMouth.volume = 0.35;
+    openMouth.volume = 0.5;
     setInterval(() => {
         document.querySelector('#character').classList.toggle('mouth');
         openMouth.play();
