@@ -576,18 +576,18 @@ function board() {
         if (!localStorage.getItem('highscore')) {
             localStorage.setItem('highscore', parseInt(score));
             const bestScore = parseInt(localStorage.getItem('highscore'));
-            document.querySelector('#best-score').innerHTML = `New Lowest Record: ${bestScore}`;
+            document.querySelector('#best-score').innerHTML = `New Lowest Score: ${bestScore}`;
             // add class for pulse animation if score is new best score
             document.querySelector('#best-score').classList.add('new-record');
         } else if (parseInt(score) < parseInt(localStorage.getItem('highscore'))) {
             localStorage.setItem('highscore', score);
             const bestScore = parseInt(localStorage.getItem('highscore'));
-            document.querySelector('#best-score').innerHTML = `New Lowest Record: ${bestScore}`;
+            document.querySelector('#best-score').innerHTML = `New Lowest Score: ${bestScore}`;
             // add class for pulse animation if score is new best score
             document.querySelector('#best-score').classList.add('new-record');
         } else {
             const bestScore = parseInt(localStorage.getItem('highscore'));
-            document.querySelector('#best-score').innerHTML = `Lowest Record: ${bestScore}`;
+            document.querySelector('#best-score').innerHTML = `Lowest Score: ${bestScore}`;
         }
 
         // add to executed in order for gameover not to happen
