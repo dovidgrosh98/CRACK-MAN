@@ -750,5 +750,3 @@ function board() {
 stopWatch();
 scoreBoard();
 board();
-
-module.exports = { board };
