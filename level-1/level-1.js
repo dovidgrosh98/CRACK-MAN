@@ -737,6 +737,7 @@ function board() {
             }
         }
     });
+    // toggle class for mouth animation, and add audio
     const openMouth = new Audio('https://res.cloudinary.com/dg98/video/upload/v1563207353/jump.wav');
     openMouth.volume = 0.5;
     setInterval(() => {
@@ -745,6 +746,9 @@ function board() {
     }, 200);
 }
 
+
 stopWatch();
 scoreBoard();
 board();
+
+module.exports = { board };
